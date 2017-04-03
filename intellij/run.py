@@ -21,8 +21,8 @@ dockerargs = [
     "-v", "/etc/localtime:/etc/localtime:ro",
     "-v", "/tmp/.X11-unix/:/tmp/.X11-unix:ro",
     "-e", "DISPLAY={0}".format(os.environ['DISPLAY']),
-    "--network=<ENTER NETWORK NEEDED>",
-    "<ENTER NAME FROM BUILD>"  
+    "-v", "{0}/:/root/".format(os.environ['HOME']),
+    "barnie995/intellij"  
 ]
 
 
