@@ -5,5 +5,6 @@ RUN \
   apt-get update && \
   apt-get -t jessie-backports install -y openjdk-8-jdk
 
- 
+EXPOSE 6789
+
 ENTRYPOINT ["bash"]
