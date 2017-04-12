@@ -2,6 +2,7 @@
 
 import subprocess
 import os
+import argparse
 
 x11addargs = [
     "sudo", "xhost", "+local:root" 
@@ -26,12 +27,26 @@ dockerargs = [
     "--cpuset-cpus", "0",
     "-v", "{0}/Downloads:/home/chrome/Downloads".format(os.environ['HOME']),
     "--security-opt", "seccomp={0}/chrome.json".format(os.getcwd()),
-    "--device", "/dev/snd", 
+    "--device", "/dev/snd",
+    "--device", "/dev/dri", 
+    "--cap-add=SYS_ADMIN",
     "barnie995/chrome"  
 ]
 
+#Arg Parsing Stuff
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('-P', '--proxy')
+args = parser.parse_args()
 
 subprocess.call(x11addargs)
-subprocess.call(dockerargs)
+
+if args.proxy is not None:
+    dockerargs.append("--proxy-server={0}".format(args.proxy))
+    subprocess.call(dockerargs) 
+else:
+    parser.print_help() 
+
 subprocess.call(x11removeargs)
 
