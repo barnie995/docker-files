@@ -28,9 +28,8 @@ dockerargs = [
     "-v", "{0}/Downloads:/home/chrome/Downloads".format(os.environ['HOME']),
     "--security-opt", "seccomp={0}/chrome.json".format(os.getcwd()),
     "--device", "/dev/snd",
-    "--device", "/dev/dri", 
-    "--cap-add=SYS_ADMIN",
-    "barnie995/chrome"  
+    "--device", "/dev/dri",
+    "barnie995/chrome", "--no-sandbox"  
 ]
 
 #Arg Parsing Stuff
@@ -46,7 +45,7 @@ if args.proxy is not None:
     dockerargs.append("--proxy-server={0}".format(args.proxy))
     subprocess.call(dockerargs) 
 else:
-    parser.print_help() 
+    subprocess.call(dockerargs)
 
 subprocess.call(x11removeargs)
 

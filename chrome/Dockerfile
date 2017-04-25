@@ -27,7 +27,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /src/*.deb
 
 # Add chrome user
-RUN groupadd --gid 995 chrome && useradd -g 995 -G audio,video chrome \
+RUN groupadd --gid 995 chrome && useradd --gid 995 --groups audio,video chrome \
     && mkdir -p /home/chrome/Downloads && chown -R chrome:chrome /home/chrome
 
 COPY local.conf /etc/fonts/local.conf
@@ -36,4 +36,4 @@ COPY local.conf /etc/fonts/local.conf
 USER chrome
 
 # Autorun chrome
-ENTRYPOINT [ "google-chrome" ]
+ENTRYPOINT [ "bash" ]

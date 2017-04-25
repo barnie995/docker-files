@@ -11,8 +11,7 @@ dockerargs = [
     "run",
     "-ti",
     "-v", "/etc/localtime:/etc/localtime:ro",
-    "-v", "{0}/:/root/".format(os.environ['HOME']),
-    "--network", "host",    
+    "-v", "{0}/:/root/".format(os.environ['HOME']),  
     "barnie995/java"  
 ]
 

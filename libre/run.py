@@ -20,7 +20,7 @@ dockerargs = [
     "-ti",
     "-v", "/etc/localtime:/etc/localtime:ro",
     "-v", "/tmp/.X11-unix/:/tmp/.X11-unix:ro",
-    "-v", "{0}/:/root/".format(os.environ['HOME']),
+    "-v", "{0}/:/root/hostFiles/".format(os.environ['HOME']),
     "-e", "DISPLAY={0}".format(os.environ['DISPLAY']),
     "barnie995/libre"  
 ]

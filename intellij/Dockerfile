@@ -12,6 +12,5 @@ WORKDIR /opt/
 RUN \
     tar -xvf ideaIU.tar.gz
 
-
 WORKDIR /opt/idea-IU-171.3780.107/bin 
 ENTRYPOINT ["./idea.sh"]

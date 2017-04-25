@@ -22,20 +22,12 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
-ENV ATOM_VERSION 1.15.0
 
-# download the source
-RUN buildDeps=' \
-        ca-certificates \
-        curl \
-    ' \
-    && set -x \
-    && apt-get update && apt-get install -y $buildDeps --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/* \
-    && curl -sSL https://github.com/atom/atom/releases/download/v${ATOM_VERSION}/atom-amd64.deb -o /tmp/atom-amd64.deb \
-    && dpkg -i /tmp/atom-amd64.deb \
-    && rm -rf /tmp/*.deb \
-    && apt-get purge -y --auto-remove $buildDeps
+# copy the source
+
+COPY atom*.deb /tmp/atom.deb
+
+RUN dpkg -i /tmp/atom.deb
 
 # Autorun atom
 ENTRYPOINT [ "atom", "--foreground" ]
